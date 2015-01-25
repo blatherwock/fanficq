@@ -5,15 +5,22 @@
     <title>FanFicQ</title>
     <link rel="icon" type="image/png" href="icons/icon_16.png" />
     <link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/index.css" />
     <script src="lib/zepto.js" defer="defer"></script>
 	<script src="js/index.js" defer="defer"></script>
   </head>
   <body>
 	<h1>FanFicQ</h1>
-	<button id="import">Import History</button>
-	<button id="display">Show local storage values</button>
-	<button id="clear">Clear local storage</button>
+	<div class="controlPanel">
+	  <button id="import">Import History</button>
+	  <button id="importText">Import Text</button>
+	  <button id="display">Show local storage values</button>
+	  <button id="clear">Clear local storage</button>
+	</div>
 	<div id="contentArea">
+	  <textarea id="storageIO"></textarea>
+	  <ul id="storyList">
+	  </ul>
 	</div>
   </body>
 </html>

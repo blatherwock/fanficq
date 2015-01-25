@@ -50,26 +50,44 @@ var importHistory = function() {
 		});
 	});
 };
+var importText = function() {
+	var storageInput = $("#storageIO").val();
+	try {
+		var newStorage = JSON.parse(storageInput);
+		chrome.storage.local.clear(function() {
+			chrome.storage.local.set(newStorage, function() {
+				displayStorage();
+			});
+		});
+	} catch (e) {
+		//whoops didn't work. Oh well...
+	}
+}
 var displayStorage = function() {
 	chrome.storage.local.get(null, function(items) {
 		var stories = items["readStories"]
-		$("#contentArea").empty();
+		$("#storyList").empty();
 		
 		$.each(stories, function(index, item) {
-			var storyNode = $("<p />", {text: item.id + ": " + item.title + ", " + item.lastChapter});
-			$("#contentArea").append(storyNode);
+			var storyNode = $("<li />");
+			var storyLink = $("<a />", {href: item.url, text: item.id});
+			var innerStory = $("<span />", {text: item.title + ", " + item.lastChapter});
+			storyNode.append(storyLink);
+			storyNode.append(innerStory);
+			$("#storyList").append(storyNode);
 		});
-		//$("#contentArea").text(JSON.stringify(items));
+		$("#storageIO").val(JSON.stringify(items));
 	});
 };
 var clearStorage = function() {
-	chrome.storage.sync.clear();
+	chrome.storage.local.clear();
 	displayStorage();
 };
 
 
 var initHandlers = function() {
 	$("#import").click(importHistory);
+	$("#importText").click(importText);
 	$("#display").click(displayStorage);
 	$("#clear").click(clearStorage);
 }
