@@ -1,0 +1,8 @@
+.fanficq-read {
+	background-color: #EDD;
+}
+.fanficq-read .stitle {
+	text-decoration: line-through !important;
+	font-style: italic;
+	
+}
