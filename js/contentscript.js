@@ -1,7 +1,6 @@
 // Content Scripts
 
-//https://www.fanfiction.net/s/4564625/1/Isis-s-Bane
-(function() {
+var updateReadStoriesForPage = function() {
 	var readStories;
 	
 	chrome.storage.local.get("readStories", function(items) {
@@ -16,8 +15,17 @@
 			if (parseInt(item.lastChapter, 10) < parseInt(totalChapters, 10)) {
 				storyNode.addClass("fanficq-started");
 			} else {
+				storyNode.removeClass("fanficq-started");
 				storyNode.addClass("fanficq-read");
 			}
 		});
 	};
-})();
+};
+
+updateReadStoriesForPage();
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	if (request.action == "onActivated") {
+		updateReadStoriesForPage();
+	}
+});

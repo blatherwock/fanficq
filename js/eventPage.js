@@ -30,3 +30,7 @@ chrome.history.onVisited.addListener(function(item) {
 		});
 	}
 });
+
+chrome.tabs.onActivated.addListener(function(activeInfo) {
+	chrome.tabs.sendMessage(activeInfo.tabId, {action: "onActivated"});
+});
