@@ -44,7 +44,6 @@ var importHistory = function() {
 				readStories.add(story);
 			}
 		});
-		console.log(readStories.getAllAsArray());
 		chrome.storage.local.set({"readStories": readStories.getAllAsArray()}, function() {
 			displayStorage();
 		});

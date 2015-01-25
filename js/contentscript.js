@@ -11,7 +11,13 @@
 
 	var markReadStories = function () {
 		$.each(readStories, function(index, item) {
-			$( "div[data-storyid*='" + item.id + "']" ).addClass("fanficq-read");
+			var storyNode = $( "div[data-storyid*='" + item.id + "']" );
+			var totalChapters = storyNode.attr("data-chapters");
+			if (parseInt(item.lastChapter, 10) < parseInt(totalChapters, 10)) {
+				storyNode.addClass("fanficq-started");
+			} else {
+				storyNode.addClass("fanficq-read");
+			}
 		});
 	};
 })();

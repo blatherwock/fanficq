@@ -3,6 +3,11 @@
 }
 .fanficq-read .stitle {
 	text-decoration: line-through !important;
-	font-style: italic;
-	
+	font-style: italic;	
+}
+.fanficq-started {
+	background-color: #DDE;
+}
+.fanficq-started .stitle {
+	font-stlye: italic;
 }
