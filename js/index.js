@@ -68,10 +68,12 @@ var displayStorage = function() {
 		$("#storyList").empty();
 		
 		$.each(stories, function(index, item) {
-			var storyNode = $("<li />");
+			var storyNode = $("<tr />");
 			var storyLink = $("<a />", {href: item.url, text: item.id});
-			var innerStory = $("<span />", {text: item.title + ", " + item.lastChapter});
-			storyNode.append(storyLink);
+			var lastChapter = $("<td />", {text: item.lastChapter, "class": "lastChapter"});
+			var innerStory = $("<td />", {text: item.title});
+			storyNode.append($("<td />").append(storyLink));
+			storyNode.append(lastChapter);
 			storyNode.append(innerStory);
 			$("#storyList").append(storyNode);
 		});

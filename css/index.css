@@ -1,16 +1,28 @@
+h1 {
+	font-size: 20px;
+	font-weight: bold;
+	margin: 20px;
+}
+.controlPanel {
+	margin-left: 20px;
+}
+#contentArea {
+	margin: 20px;
+}
 #storyList {
 
 }
 #storyList a {
 	width: 80px;
+	padding-top: 8px;
 	display: inline-block;
 }
-
+#storyList .lastChapter {
+	display: inline-block;
+	width: 30px;
+}
 #storageIO {
-	width: 100%;
+	width: 80%;
 	height: 300px;
 }
 
-.contentArea {
-
-}
