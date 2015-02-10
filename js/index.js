@@ -10,7 +10,7 @@ var readStories = (function() {
 				stories[story.id] = story;
 			} else {
 				var existingStory = stories[story.id];
-				if (parseInt(existingStory.lastChapter, 10) < parseInt(story.lastChapter, 10)) {
+				if (parseInt(existingStory.lastChapter, 10) <= parseInt(story.lastChapter, 10)) {
 					existingStory.title = story.title;
 					existingStory.lastChapter = story.lastChapter;
 					existingStory.url = story.url;
@@ -36,16 +36,22 @@ var readStories = (function() {
 var importHistory = function() {
 	chrome.history.search({text:"",maxResults:100000,startTime:0}, function(results) {
 		var storyIDRegex = /fanfiction.net\/s\/(\d+)\/(\d+)/;
-		
-		$.each(results, function(index, item) {
-			var regexResults = storyIDRegex.exec(item.url);
-			if(regexResults != null) {
-				var story = {title: item.title, id:regexResults[1], lastChapter:regexResults[2], url:item.url};
-				readStories.add(story);
-			}
-		});
-		chrome.storage.local.set({"readStories": readStories.getAllAsArray()}, function() {
-			displayStorage();
+		chrome.storage.local.get("readStories", function(items) {
+			var stories = items["readStories"];
+			$.each(stories, function(index, item) {
+				readStories.add(item);
+			});
+
+			$.each(results, function(index, item) {
+				var regexResults = storyIDRegex.exec(item.url);
+				if(regexResults != null) {
+					var story = {title: item.title, id:regexResults[1], lastChapter:regexResults[2], url:item.url};
+					readStories.add(story);
+				}
+			});
+			chrome.storage.local.set({"readStories": readStories.getAllAsArray()}, function() {
+				displayStorage();
+			});
 		});
 	});
 };

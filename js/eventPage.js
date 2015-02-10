@@ -14,7 +14,7 @@ chrome.history.onVisited.addListener(function(item) {
 			for(var i = 0; i < stories.length; i++) {
 				var story = stories[i];
 				if (story.id == newStory.id) {
-					if(parseInt(story.lastChapter, 10) < parseInt(newStory.lastChapter, 10)) {
+					if(parseInt(story.lastChapter, 10) <= parseInt(newStory.lastChapter, 10)) {
 						story.title = newStory.title;
 						story.lastChapter = newStory.lastChapter;
 						story.url = newStory.url;
