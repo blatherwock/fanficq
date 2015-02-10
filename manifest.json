@@ -9,6 +9,7 @@
     "permissions" : [
 		"storage",
 		"history",
+		"bookmarks",
 		"https://www.fanfiction.net/"
     ],
 
